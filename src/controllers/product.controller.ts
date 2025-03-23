@@ -23,11 +23,10 @@ export const getAllProducts = async (_req: Request, res: Response) => {
     }
 }
 
-export const getDetailProduct = async (req:Request, res: Response) => {
-    const { id }  = req.params
+export const getDetailProduct = async (_req:Request, res: Response) => {
+    const product = res.locals.product
 
    try {
-    const product = await db.query<TProduct>('SELECT * FROM products WHERE id=$1 LIMIT 1',[id])
     
     res.json(product)
    } catch (error : any) {
@@ -81,7 +80,7 @@ export const newProduct = async (req: Request, res: Response) => {
             category: category
         };
 
-        await db.query(
+        await db.none(
             `INSERT INTO products (name, description, price, stock, category) 
            VALUES ($1, $2, $3, $4, $5)`,
             [obj.name, obj.description, obj.price, obj.stock, obj.category]
@@ -133,10 +132,10 @@ export const updateProduct = async (req: Request, res: Response) => {
 
 
     try {
-        const updateProduct = await db.query<TProduct>('UPDATE products SET name=$1 , description=$2, price=$3, stock=$4, category=$5 WHERE id=$6',
+       await db.none('UPDATE products SET name=$1 , description=$2, price=$3, stock=$4, category=$5 WHERE id=$6',
             [name, description, price, stock, category, id]
         );
-        res.status(201).json(updateProduct)
+        res.status(201).json([])
     } catch (error: any) {
         res.status(500).json({
             message:error.message
