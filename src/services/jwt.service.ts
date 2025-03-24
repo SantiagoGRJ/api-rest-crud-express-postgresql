@@ -8,11 +8,11 @@ const SECRET_KEY = EnvConfig.SECRET_KEY
 export const generateToken = (user: IUser) => {
     return jwt.sign({ username: user.name }, SECRET_KEY, { expiresIn: '1h' })
 }
-export const valitedToken = (token: string) => {
-   try{
-    const decoded = jwt.verify(token,SECRET_KEY)
-    return {success:true,data:decoded}
-   }catch(e:any){
-    return {success:false, error:e.message}
-   }
+export const isValidToken = (token: string) => {
+    try {
+        const decoded = jwt.verify(token, SECRET_KEY)
+        return { success: true, data: decoded }
+    } catch (e: any) {
+        return { success: false, error: e.message }
+    }
 }

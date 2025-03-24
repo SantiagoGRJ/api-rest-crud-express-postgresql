@@ -5,8 +5,13 @@ import { verifiedFormatIdCategories } from "../middlewares/verifiedFormatIdCateg
 const router = express.Router()
 
 const middlewares = [verifiedFormatIdCategories]
+
 router.get('/',getAllCategories)
+
 router.get('/:id',middlewares,getDetailsCategory)
+
 router.post('/',newCategory)
+
 router.delete('/:id',middlewares,deleteCategory)
+
 export default router

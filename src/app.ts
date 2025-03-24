@@ -4,11 +4,12 @@ import productRoutes from "./routes/product.routes"
 import authRoutes from "./routes/auth.routes"
 import rolesRoutes from "./routes/role.routes"
 import categoryRoutes from "./routes/categories.route"
-
+import cookieparser from "cookie-parser"
 
 
 const app = express()
 
+app.use(cookieparser())
 
 app.use(limiter)
 

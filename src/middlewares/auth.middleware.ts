@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express"
-import { valitedToken } from "../services/jwt.service"
+import { isValidToken } from "../services/jwt.service"
 
 
 export const authMiddleware = (req:Request,res:Response, next:NextFunction) => {
@@ -12,12 +12,13 @@ export const authMiddleware = (req:Request,res:Response, next:NextFunction) => {
         return
     }
     const token = authHeader?.split(' ')[1]
-    const isValidtoken = valitedToken(token)
-    if(isValidtoken.error){
+    const validToken = isValidToken(token)
+    if(validToken.error){
         res.status(401).json({
             message:"Invalid Token or Expired Token"
         })
         return
     }
+    
     next()
 }
