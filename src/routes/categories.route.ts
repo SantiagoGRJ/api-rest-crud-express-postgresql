@@ -1,17 +1,21 @@
 import express from "express"
-import { deleteCategory, getAllCategories, getDetailsCategory, newCategory } from "../controllers/categories.controller"
+import { categoryController } from "../controllers/categories.controller"
 import { verifiedFormatIdCategories } from "../middlewares/verifiedFormatIdCategories.middleware"
 
 const router = express.Router()
 
 const middlewares = [verifiedFormatIdCategories]
 
-router.get('/',getAllCategories)
+router.get('/', categoryController.getAllCategories)
 
-router.get('/:id',middlewares,getDetailsCategory)
+router.get('/:id', middlewares, categoryController.getCategoryById)
 
-router.post('/',newCategory)
+router.post('/', categoryController.createCategory)
 
-router.delete('/:id',middlewares,deleteCategory)
+router.put('/:id',middlewares,categoryController.updateCategory)
+
+router.patch('/:id',middlewares, categoryController.patchUpdateCategory)
+
+router.delete('/:id', middlewares, categoryController.deleteCategory)
 
 export default router

@@ -1,5 +1,5 @@
 import express from "express"
-import { deleteProduct, getAllProducts, getDetailProduct, newProduct, patchUpdateProduct, updateProduct } from "../controllers/product.controller"
+import { productController } from "../controllers/product.controller";
 import { verifiedFormatId } from "../middlewares/verifiedFormatId.middleware";
 import { authMiddleware } from "../middlewares/auth.middleware";
 import { isLogIn } from "../middlewares/isLogIn.middleware";
@@ -13,17 +13,17 @@ const authMiddlewares = [authMiddleware,isLogIn]
 
 const middlewares = [verifiedFormatId]
 
-router.get('/',authMiddlewares, getAllProducts)
+router.get('/',authMiddlewares, productController.getAllProducts)
 
-router.post('/',authMiddlewares, newProduct)
+router.post('/',authMiddlewares, productController.createProduct)
 
-router.get('/:id',authMiddlewares, middlewares, getDetailProduct)
+router.get('/:id',authMiddlewares, middlewares, productController.getProductById)
 
-router.put('/:id',authMiddlewares, middlewares, updateProduct)
+router.put('/:id',authMiddlewares, middlewares, productController.updateProduct)
 
-router.patch('/:id',authMiddlewares,middlewares,patchUpdateProduct)
+router.patch('/:id',authMiddlewares,middlewares,productController.patchUpdateProduct)
 
-router.delete('/:id',authMiddlewares,middlewares,deleteProduct)
+router.delete('/:id',authMiddlewares,middlewares,productController.deleteProduct)
 
 
 export default router

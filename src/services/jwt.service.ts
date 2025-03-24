@@ -5,6 +5,8 @@ import { IUser } from "../lib/definitions";
 
 const SECRET_KEY = EnvConfig.SECRET_KEY
 
+
+
 export const generateToken = (user: IUser) => {
     return jwt.sign({ username: user.name }, SECRET_KEY, { expiresIn: '1h' })
 }
