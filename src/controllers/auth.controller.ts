@@ -19,7 +19,8 @@ class AuthController {
             res.status(400).json({ message: "Password is Empty, check field" })
             return
         }
-        const user : IUser | null = await authService.Login(email)
+        try {
+            const user : IUser | null = await authService.Login(email)
         
         if(user === null){
             res.status(404).json({
@@ -43,6 +44,9 @@ class AuthController {
             maxAge: 3600000       // 1 hour expiration
         })
         res.json({token})
+        } catch (error:unknown) {
+            
+        }
         
     }
 

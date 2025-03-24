@@ -16,7 +16,17 @@ class AuthService {
     }
 
     async Register(user:IUser,id_role: { id:string}){
-       return await db.none("INSERT INTO users (name,email,password,id_role) VALUES ($1,$2,$3,$4)", [user.name, user.email, user.password, id_role.id])
+        try {
+            return await db.none("INSERT INTO users (name,email,password,id_role) VALUES ($1,$2,$3,$4)", [user.name, user.email, user.password, id_role.id])
+
+        } catch (error:unknown) {
+            if(error instanceof Error){
+                throw new Error(`Database Error: ${error.message}`)
+            }
+            else{
+                throw new Error(`Unexpected Error: ${error}`)
+            }
+        }
     }
     
 }

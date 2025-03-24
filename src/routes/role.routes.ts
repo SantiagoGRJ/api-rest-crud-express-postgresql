@@ -1,8 +1,8 @@
 import express from "express"
-import { getAllRoles } from "../controllers/role.controller"
+import { roleController } from "../controllers/role.controller"
 
 const router = express.Router()
 
-router.get('/',getAllRoles)
+router.get('/',roleController.getAllCategories)
 
 export default router

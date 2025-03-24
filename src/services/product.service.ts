@@ -1,5 +1,5 @@
 import db from "../db";
-import { TProduct } from "../models/product.model";
+import { IProduct } from "../models/product.model";
 
 
 class ProductService {
@@ -17,7 +17,7 @@ class ProductService {
         
         }
     }
-    async createProduct(product:TProduct){
+    async createProduct(product:IProduct){
         try {
            return await db.one(
                 `INSERT INTO products (name, description, price, stock, category) 
@@ -32,7 +32,7 @@ class ProductService {
             }
         }
     }
-    async updateProduct(id: string,product:TProduct){
+    async updateProduct(id: string,product:IProduct){
         try {
            return await db.one('UPDATE products SET name=$1 , description=$2, price=$3, stock=$4, category=$5 WHERE id=$6',
                 [product.name, product.description, product.price, product.stock, product.category, id]
