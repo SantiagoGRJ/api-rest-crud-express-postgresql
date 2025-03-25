@@ -45,7 +45,7 @@ class CategoryController {
         try {
              await categoryService.createCategory(newCategory)
             res.status(201).json({
-                message: `Category Created Called is ${newCategory.name}`
+               success:true, message: `Category Created Called is ${newCategory.name}`
             })
         } catch (e: any) {
             if (e.constraint === "categories_name_key") {
@@ -117,7 +117,7 @@ class CategoryController {
         try {
             await categoryService.deleteCategory(id)
             res.status(200).json({
-                message: `Category deleted successfully`
+               success:true, message: `Category deleted successfully`
             })
         } catch (error: any) {
             res.status(500).json({

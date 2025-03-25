@@ -7,7 +7,7 @@ export const verifiedFormatIdCategories = async (req: Request, res: Response, ne
     
     if (!uuidValidate(id)) {
         res.status(400).json({
-            message: "Invalid Id Format"
+          success:false,  message: "Invalid Id Format"
         })
         return
     } else {
@@ -15,7 +15,7 @@ export const verifiedFormatIdCategories = async (req: Request, res: Response, ne
         const category = await db.one('SELECT * FROM categories WHERE id=$1 ', id)
         if (category.length === 0) {
             res.status(404).json({
-                message: "Verified the Id"
+               success:false, message: "Verified the Id"
             })
             return
         } else {

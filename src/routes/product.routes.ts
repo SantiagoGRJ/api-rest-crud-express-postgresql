@@ -1,15 +1,14 @@
 import express from "express"
 import { productController } from "../controllers/product.controller";
 import { verifiedFormatId } from "../middlewares/verifiedFormatId.middleware";
-import { authMiddleware } from "../middlewares/auth.middleware";
-import { isLogIn } from "../middlewares/isLogIn.middleware";
-
+import { isLogInWithBearer } from "../middlewares/isLoginBearer.middleware";
+import { isLogInWithCookies } from "../middlewares/isLogInCookie.middleware";
 
 
 const router = express.Router()
 
 
-const authMiddlewares = [authMiddleware,isLogIn]
+const authMiddlewares = [isLogInWithBearer, isLogInWithCookies]
 
 const middlewares = [verifiedFormatId]
 

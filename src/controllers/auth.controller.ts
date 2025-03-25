@@ -44,8 +44,10 @@ class AuthController {
             maxAge: 3600000       // 1 hour expiration
         })
         res.json({token})
-        } catch (error:unknown) {
-            
+        } catch (error:any) {
+            res.status(500).json({
+              success:false,  message: error.message
+            })
         }
         
     }
@@ -96,18 +98,18 @@ class AuthController {
             await authService.Register(newUser,idRole.id)
             
             res.status(201).json({
-                message: `Created User ${name}`
+               success:true, message: `Created User ${name}`
             })
     
         } catch (e:any) {
             if (e.constraint === "users_email_key") {
                 res.status(500).json({
-                    message: `Database Error : Email duplicate Try a different Email!`
+                  success:false,  message: `Database Error : Email duplicate Try a different Email!`
                 })
                 console.log(e);
             }else if(e.constraint === "users_name_key"){
                 res.status(500).json({
-                    message: `Database Error : name duplicate Try a different Name!`
+                   success:false, message: `Database Error : name duplicate Try a different Name!`
                 })
                 console.log(e);
             } 
@@ -116,14 +118,16 @@ class AuthController {
     
     
     }
-    async logOut(_req:Request, res: Response) {
+    async logOut(_req: Request, res: Response) {
         try{
             res.clearCookie('token');
             res.status(200).json({
                 success:true, message:"Logged out Successfully"
             })
-        }catch(e:any){
-            
+        }catch(error:any){
+            res.status(500).json({
+               success:false, message: error.message
+            })
         }
     }
     

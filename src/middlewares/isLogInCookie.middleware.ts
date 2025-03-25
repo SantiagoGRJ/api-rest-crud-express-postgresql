@@ -2,12 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import { isValidToken } from "../services/jwt.service";
 
 
-export const isLogIn = (req: Request, res: Response, next: NextFunction) => {
+export const isLogInWithCookies = (req: Request, res: Response, next: NextFunction) => {
     const { token } = req.cookies
    
     try {
         if (!token) {
             res.status(401).json({
+                //message:"Access denied, Token not provided. "
                 success: false, message: "Authentication required"
             })
             return
@@ -17,7 +18,7 @@ export const isLogIn = (req: Request, res: Response, next: NextFunction) => {
         if (validToken.error) {
             res.clearCookie('token')
             res.status(401).json({
-                message: "Invalid Token or Expired Token    "
+                message: "Invalid Token or Expired Token"
             })
             return
         }

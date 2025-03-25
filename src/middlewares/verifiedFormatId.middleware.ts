@@ -7,7 +7,7 @@ export const verifiedFormatId = async (req: Request, res: Response, next: NextFu
     
     if (!uuidValidate(id)) {
         res.status(400).json({
-            message: "Invalid Id Format"
+           success: false, message: "Invalid Id Format"
         })
         return
     } else {
@@ -15,7 +15,7 @@ export const verifiedFormatId = async (req: Request, res: Response, next: NextFu
         const product = await db.one('SELECT * FROM products WHERE id=$1 ', id)
         if (product.length === 0) {
             res.status(404).json({
-                message: "Verified the Id"
+              success:false,  message: "Verified the Id"
             })
             return
         } else {
