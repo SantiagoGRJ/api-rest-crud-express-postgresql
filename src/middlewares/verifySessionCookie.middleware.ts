@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { isValidToken } from "../services/jwt.service";
 
 
-export const isLogInWithCookies = (req: Request, res: Response, next: NextFunction) => {
+const verifySessionCookies = (req: Request, res: Response, next: NextFunction) => {
     const { token } = req.cookies
    
     try {
@@ -29,3 +29,4 @@ export const isLogInWithCookies = (req: Request, res: Response, next: NextFuncti
         })
     }
 }
+export default verifySessionCookies

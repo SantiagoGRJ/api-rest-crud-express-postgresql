@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import isValidFildsProducts from "../utils/validFields.utils";
+import isValidFildsProducts from "../utils/validFieldsProducts.utils";
 import { IProduct } from "../models/product.model";
 
 
-const checkFieldsProduct = async (req: Request, res: Response, next: NextFunction) => {
+const validateProductFields = async (req: Request, res: Response, next: NextFunction) => {
     let { name, description, category, price, stock, url_img }: IProduct = req.body
     const isValid = isValidFildsProducts.safeParse({
         name: name,
@@ -26,4 +26,4 @@ const checkFieldsProduct = async (req: Request, res: Response, next: NextFunctio
 }
 
 
-export default checkFieldsProduct
+export default validateProductFields

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express"
 import { isValidToken } from "../services/jwt.service"
 
 
-export const isLogInWithBearer = (req: Request, res: Response, next: NextFunction) => {
+ const verifySessionBearer = (req: Request, res: Response, next: NextFunction) => {
     let authHeader = req.headers.authorization
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -23,3 +23,5 @@ export const isLogInWithBearer = (req: Request, res: Response, next: NextFunctio
 
     next()
 }
+
+export default verifySessionBearer
