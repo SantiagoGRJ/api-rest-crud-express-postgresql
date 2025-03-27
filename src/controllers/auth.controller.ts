@@ -24,7 +24,7 @@ class AuthController {
         
         if(user === null){
             res.status(404).json({
-                message:"Check your email or password"
+              success:true,  message:"Check your email or password"
             })
             return
         }
@@ -32,7 +32,7 @@ class AuthController {
         const validPassword = await comparePassword(password, user.password)
         if(!validPassword){
             res.status(404).json({
-                message:"Check your email or password"
+               success: false, message:"Check your email or password"
             })
             return
         }

@@ -19,7 +19,7 @@ class ProductService {
     }
     async createProduct(product:IProduct){
         try {
-           return await db.one(
+           return await db.query(
                 `INSERT INTO products (name, description, price, stock, category) 
                VALUES ($1, $2, $3, $4, $5)`,
                 [product.name, product.description, product.price, product.stock, product.category]

@@ -30,49 +30,20 @@ class ProductController {
     }
     async createProduct(req: Request, res: Response) {
         const { name, description, price, stock, category }: TProduct = req.body
-        if (!name) {
-            res.status(400).json({
-                message: 'Error, Check Field Name'
-            })
-            return
-        }
-        if (!description) {
-            res.status(400).json({
-                message: 'Error, Check Field description'
-            })
-            return
-        }
-        if (!price) {
-            res.status(400).json({
-                message: 'Error, Check Field Price'
-            })
-            return
-        }
-        if (!stock) {
-            res.status(400).json({
-                message: 'Error, Check Field Stock'
-            })
-            return
-        }
-        if (!category) {
-            res.status(400).json({
-                message: 'Error, Check Field Category'
-            })
-            return
-        }
+        
         try {
             const product = {
                 name: name,
-                description: name,
+                description: description,
                 price: price,
                 stock: stock,
                 category: category
             }
     
-            const newProduct = productService.createProduct(product)
+            await productService.createProduct(product)
     
             res.status(201).json({
-                success: true, message: `Product Created ${newProduct}`
+                success: true, message: ` Created ${product.name}`
             })
         } catch (error: any) {
             res.status(500).json({
@@ -83,47 +54,16 @@ class ProductController {
     async updateProduct(req: Request, res: Response) {
         const { name, description, price, stock, category }: TProduct = req.body
         const { id } = req.params
-        if (!name) {
-            res.status(400).json({
-                message: 'Error, Check Field Name'
-            })
-            return
-        }
-        if (!description) {
-            res.status(400).json({
-                message: 'Error, Check Field description'
-            })
-            return
-        }
-        if (!price) {
-            res.status(400).json({
-                message: 'Error, Check Field Price'
-            })
-            return
-        }
-        if (!stock) {
-            res.status(400).json({
-                message: 'Error, Check Field Stock'
-            })
-            return
-        }
-        if (!category) {
-            res.status(400).json({
-                message: 'Error, Check Field Category'
-            })
-            return
-        }
-    
     
         try {
             const product = {
                 name: name,
-                description: name,
+                description: description,
                 price: price,
                 stock: stock,
                 category: category
             }
-            const updateProduct = productService.updateProduct(id, product)
+            const updateProduct = await productService.updateProduct(id, product)
             res.status(201).json({
                 success: true, message: `Produc Updated ${updateProduct}`
             })
@@ -137,6 +77,7 @@ class ProductController {
     async patchUpdateProduct (req: Request, res: Response) {
         let { name, description, price, stock, category }: TProduct = req.body
         let product = res.locals.product
+        
         const { id } = req.params
         name ??= product.name;
         description ??= product.description;
