@@ -18,7 +18,7 @@ const verifySessionCookies = (req: Request, res: Response, next: NextFunction) =
         if (validToken.error) {
             res.clearCookie('token')
             res.status(401).json({
-                message: "Invalid Token or Expired Token"
+               success:false, message: "Invalid Token or Expired Token"
             })
             return
         }

@@ -1,10 +1,10 @@
 import express from "express"
 import { categoryController } from "../controllers/category.controller"
-import { verifiedFormatIdCategories } from "../middlewares/verifiedFormatIdCategories.middleware"
+import validateCategoryId from "../middlewares/validateCategoryId.middleware"
 
 const router = express.Router()
 
-const middlewares = [verifiedFormatIdCategories]
+const middlewares = [validateCategoryId]
 
 router.get('/', categoryController.getAllCategories)
 
