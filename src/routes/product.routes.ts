@@ -21,7 +21,7 @@ router.get('/:id',authMiddlewares, middlewares, productController.getProductById
 
 router.put('/:id',authMiddlewares,validateProductFields, middlewares, productController.updateProduct)
 
-router.patch('/:id',authMiddlewares,validateProductFields, middlewares,productController.patchUpdateProduct)
+router.patch('/:id',authMiddlewares, middlewares,productController.patchUpdateProduct)
 
 router.delete('/:id',authMiddlewares,middlewares,productController.deleteProduct)
 

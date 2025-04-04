@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import db from "../db";
 import { categoryService } from "../services/category.service";
+import { ICategory } from "../models/category.model";
 
 class CategoryController {
     
@@ -25,25 +26,20 @@ class CategoryController {
     }
 
     async createCategory(req: Request, res: Response) {
-        const { name, description } = req.body
-        if (!name) {
-            res.status(400).json({
-                message: 'Error, Check Field Name'
-            })
-            return
-        }
-        if (!description) {
-            res.status(400).json({
-                message: 'Error, Check Field description'
-            })
-            return
-        }
-        const newCategory = {
-            name: name,
-            description: description
-        }
+        let { name, description } : ICategory = req.body
+        
+        
+        
         try {
-             await categoryService.createCategory(newCategory)
+            let newCategory = {
+                name: name,
+                description: description
+            }
+           
+            
+           
+            await categoryService.createCategory(newCategory)
+            
             res.status(201).json({
                success:true, message: `Category Created Called is ${newCategory.name}`
             })
@@ -121,7 +117,7 @@ class CategoryController {
             })
         } catch (error: any) {
             res.status(500).json({
-                message: error.message
+              success:false,  message: error.message
             })
         }
     }

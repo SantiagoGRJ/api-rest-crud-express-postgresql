@@ -1,5 +1,5 @@
 import express from "express"
-import verifyRequestLimit from "./middlewares/verifyRequestLimit.middleware"
+
 import productRoutes from "./routes/product.routes"
 import authRoutes from "./routes/auth.routes"
 import rolesRoutes from "./routes/role.routes"
@@ -11,7 +11,7 @@ const app = express()
 
 app.use(cookieparser())
 
-app.use(verifyRequestLimit)
+
 
 app.use(express.json())
 
