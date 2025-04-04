@@ -27,6 +27,7 @@ class CategoryService {
                         [category.name, category.description]
                     );
     } catch (error: unknown) {
+      console.log(error);
       
       
       if (error instanceof Error) {

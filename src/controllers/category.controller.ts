@@ -44,19 +44,10 @@ class CategoryController {
                success:true, message: `Category Created Called is ${newCategory.name}`
             })
         } catch (e: any) {
-            if (e.constraint === "categories_name_key") {
-                res.status(500).json({
-                    message: `Database Error : Category duplicate Try a Different Category!`
-                })
-                return
-    
-            } else if (e.constraint === "categories_description_key") {
-                res.status(500).json({
-                    message: `Database Error : Description duplicate Try a different Description to Category!`
-                })
-                return
-    
-            }
+            res.status(500).json({
+             success: false, message: e.message
+            })
+            return
         }
     }
 
