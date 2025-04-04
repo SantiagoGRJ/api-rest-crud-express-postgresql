@@ -11,12 +11,12 @@ class AuthController {
     async login(req: Request, res: Response) {
         const { email, password } = req.body
         if (!email) {
-            res.status(400).json({ message: "Email is Empty, check field" })
+            res.status(400).json({ success:false, message: "Email is Empty, check field" })
             return
         }
         
         if (!password) {
-            res.status(400).json({ message: "Password is Empty, check field" })
+            res.status(400).json({ success: false, message: "Password is Empty, check field" })
             return
         }
         try {
@@ -24,7 +24,7 @@ class AuthController {
         
         if(user === null){
             res.status(404).json({
-              success:true,  message:"Check your email or password"
+              success:false,  message:"Check your email or password"
             })
             return
         }

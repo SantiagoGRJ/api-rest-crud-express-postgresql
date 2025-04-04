@@ -93,7 +93,7 @@ class ProductController {
             res.status(201).json(updateProduct)
         } catch (error: any) {
             res.status(500).json({
-                message: error.message
+              success:false,  message: error.message
             })
         }
     
@@ -107,7 +107,7 @@ class ProductController {
             })
         } catch (error: any) {
             res.status(500).json({
-                message: error.message
+              success:false,  message: error.message
             })
         }
     }
