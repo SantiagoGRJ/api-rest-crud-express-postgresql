@@ -15,7 +15,7 @@ class CategoryController {
             res.json(categories)
         } catch (error: any) {
             res.status(500).json({
-                message: error.message
+              success:false,  message: error.message
             })
         }
     }
@@ -54,18 +54,7 @@ class CategoryController {
     async updateCategory(req: Request, res: Response) {
         const { name, description } = req.body
         const { id } = req.params
-        if (!name) {
-            res.status(400).json({
-                message: 'Error, Check Field Name'
-            })
-            return
-        }
-        if (!description) {
-            res.status(400).json({
-                message: 'Error, Check Field description'
-            })
-            return
-        }
+       
         const updateCategory = {
             name: name,
             description: description
@@ -94,7 +83,7 @@ class CategoryController {
             res.status(201).json([])
         } catch (error: any) {
             res.status(500).json({
-                message: error.message
+              success:false,  message: error.message
             })
         }
     }

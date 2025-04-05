@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import db from "../db";
-import { TProduct } from "../lib/definitions";
+
 import { productService } from "../services/product.service";
+import { IProduct } from "../models/product.model";
 
 class ProductController {
     async getAllProducts(_req: Request, res: Response) {
@@ -29,7 +30,7 @@ class ProductController {
         }
     }
     async createProduct(req: Request, res: Response) {
-        const { name, description, price, stock, category }: TProduct = req.body
+        const { name, description, price, stock, category }: IProduct = req.body
         
         try {
             const product = {
@@ -49,10 +50,11 @@ class ProductController {
             res.status(500).json({
                 success: false, message: error.message
             })
+            return
         }
     }
     async updateProduct(req: Request, res: Response) {
-        const { name, description, price, stock, category }: TProduct = req.body
+        const { name, description, price, stock, category }: IProduct = req.body
         const { id } = req.params
     
         try {
@@ -75,7 +77,7 @@ class ProductController {
     
     }
     async patchUpdateProduct (req: Request, res: Response) {
-        let { name, description, price, stock, category }: TProduct = req.body
+        let { name, description, price, stock, category }: IProduct = req.body
         let product = res.locals.product
         
         const { id } = req.params

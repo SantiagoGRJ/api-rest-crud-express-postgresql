@@ -15,7 +15,7 @@ router.get('/:id', middlewares, categoryController.getCategoryById)
 
 router.post('/', validateCategoryFields,  categoryController.createCategory)
 
-router.put('/:id',middlewares,categoryController.updateCategory)
+router.put('/:id',middlewares , validateCategoryFields,categoryController.updateCategory)
 
 router.patch('/:id',middlewares, categoryController.patchUpdateCategory)
 
