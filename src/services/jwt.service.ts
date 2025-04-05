@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { EnvConfig } from "../env";
-import { IUser } from "../lib/definitions";
+import { IUser } from "../models/user.model";
 
 
 const SECRET_KEY = EnvConfig.SECRET_KEY
